@@ -1,88 +1,601 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth" data-theme="dark">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>royalturd | Material 3 Portfolio</title>
+    <meta name="description" content="Portfolio of royalturd - Computer Science Student, Automation Enthusiast, and Software Developer.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Roboto Flex & Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..900&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- Simple Icons (for brand icons like Instagram) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v5/font/simple-icons.min.css" type="text/css">
 
-  <title>Royalturd</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <script>
+        tailwind.config = {
+            darkMode: ['class', '[data-theme="dark"]'],
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto Flex', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    },
+                    colors: {
+                        // Using CSS Variables for dynamic theme switching
+                        'm3-surface': 'rgb(var(--m3-surface) / <alpha-value>)',
+                        'm3-surface-container': 'rgb(var(--m3-surface-container) / <alpha-value>)',
+                        'm3-surface-container-high': 'rgb(var(--m3-surface-container-high) / <alpha-value>)',
+                        'm3-primary': 'rgb(var(--m3-primary) / <alpha-value>)',
+                        'm3-on-primary': 'rgb(var(--m3-on-primary) / <alpha-value>)',
+                        'm3-primary-container': 'rgb(var(--m3-primary-container) / <alpha-value>)',
+                        'm3-on-primary-container': 'rgb(var(--m3-on-primary-container) / <alpha-value>)',
+                        'm3-secondary': 'rgb(var(--m3-secondary) / <alpha-value>)',
+                        'm3-secondary-container': 'rgb(var(--m3-secondary-container) / <alpha-value>)',
+                        'm3-tertiary': 'rgb(var(--m3-tertiary) / <alpha-value>)',
+                        'm3-tertiary-container': 'rgb(var(--m3-tertiary-container) / <alpha-value>)',
+                        'm3-outline': 'rgb(var(--m3-outline) / <alpha-value>)',
+                        'm3-outline-variant': 'rgb(var(--m3-outline-variant) / <alpha-value>)',
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                        '5xl': '2.5rem',
+                    },
+                    transitionTimingFunction: {
+                        'emphasized': 'cubic-bezier(0.2, 0.0, 0.0, 1.0)',
+                        'standard': 'cubic-bezier(0.2, 0.0, 0, 1.0)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.2, 0.0, 0.0, 1.0) forwards',
+                        'scale-in': 'scaleIn 0.6s cubic-bezier(0.2, 0.0, 0.0, 1.0) forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* --- CSS Variables for Theming --- */
+        :root {
+            /* Light Mode (Emerald Seed) */
+            --m3-surface: 248 253 250; /* #f8fdfa */
+            --m3-surface-container: 236 242 238; /* #ecf2ee */
+            --m3-surface-container-high: 226 232 228; /* #e2e8e4 */
+            
+            --m3-primary: 0 109 65; /* #006d41 (Darker green for light bg) */
+            --m3-on-primary: 255 255 255;
+            
+            --m3-primary-container: 149 247 188; /* #95f7bc */
+            --m3-on-primary-container: 0 33 14; /* #00210e */
+            
+            --m3-secondary: 79 99 87; /* #4f6357 */
+            --m3-secondary-container: 210 232 216; /* #d2e8d8 */
+            
+            --m3-tertiary: 62 99 115; /* #3e6373 */
+            --m3-tertiary-container: 190 234 246; /* #beauf6 */
+            
+            --m3-outline: 113 121 115;
+            --m3-outline-variant: 192 201 195;
+            
+            --text-main: 25 28 26; /* #191c1a */
+            --text-sub: 65 73 68;
+        }
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
- 
+        [data-theme="dark"] {
+            /* Dark Mode (Original) */
+            --m3-surface: 15 20 17; /* #0f1411 */
+            --m3-surface-container: 27 33 30; /* #1b211e */
+            --m3-surface-container-high: 37 43 40; /* #252b28 */
+            
+            --m3-primary: 109 213 140; /* #6dd58c */
+            --m3-on-primary: 0 57 26; /* #00391a */
+            
+            --m3-primary-container: 0 82 40; /* #005228 */
+            --m3-on-primary-container: 137 242 166; /* #89f2a6 */
+            
+            --m3-secondary: 179 204 187; /* #b3ccbb */
+            --m3-secondary-container: 58 75 65; /* #3a4b41 */
+            
+            --m3-tertiary: 165 204 223; /* #a5ccdf */
+            --m3-tertiary-container: 35 74 91; /* #234a5b */
+            
+            --m3-outline: 139 147 142; /* #8b938e */
+            --m3-outline-variant: 65 73 68; /* #414944 */
+            
+            --text-main: 225 227 223; /* #e1e3df */
+            --text-sub: 179 204 187;
+        }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i|Playfair+Display:400,400i,500,500i,600,600i,700,700i,900,900i" rel="stylesheet">
+        body {
+            background-color: rgb(var(--m3-surface));
+            color: rgb(var(--text-main));
+            transition: background-color 0.5s cubic-bezier(0.2, 0.0, 0, 1.0), color 0.5s cubic-bezier(0.2, 0.0, 0, 1.0);
+        }
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        /* Material Ripple Effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+        .ripple::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, currentColor 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+        .ripple:active::after {
+            transform: scale(0, 0);
+            opacity: 0.1;
+            transition: 0s;
+        }
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+        html { scroll-padding-top: 100px; }
 
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        
+        .card-hover-effect {
+            transition: transform 0.4s cubic-bezier(0.2, 0.0, 0.0, 1.0), background-color 0.2s linear;
+        }
+        .card-hover-effect:hover {
+            transform: scale(1.02);
+            background-color: rgb(var(--m3-surface-container-high));
+        }
+
+        /* --- PixelOS Style Loader --- */
+        .loader-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background-color: rgb(var(--m3-surface));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.2, 0.0, 0, 1.0), visibility 0.8s;
+        }
+
+        /* Logo Pulse */
+        .loader-logo {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgb(var(--m3-primary));
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: logo-reveal 1s cubic-bezier(0.2, 0, 0, 1) forwards;
+        }
+
+        /* Google Pixel-style Bouncing Dots */
+        .pixel-dots {
+            display: flex;
+            gap: 12px;
+        }
+
+        .pixel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgb(var(--m3-primary));
+            animation: pixel-bounce 1.4s infinite ease-in-out both;
+        }
+
+        .pixel-dot:nth-child(1) { animation-delay: -0.32s; background-color: rgb(var(--m3-primary)); }
+        .pixel-dot:nth-child(2) { animation-delay: -0.16s; background-color: rgb(var(--m3-tertiary)); }
+        .pixel-dot:nth-child(3) { animation-delay: 0s;     background-color: rgb(var(--m3-secondary)); }
+        .pixel-dot:nth-child(4) { animation-delay: 0.16s;  background-color: rgb(var(--m3-primary-container)); }
+
+        @keyframes logo-reveal {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pixel-bounce {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+    </style>
 </head>
+<body class="antialiased overflow-x-hidden selection:bg-m3-primary selection:text-m3-on-primary">
 
-<body>
-<!-- Mobile nav-->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-  <header id="header" class="d-flex flex-column justify-content-center">
-
-    <nav id="navbar" class="navbar nav-menu">
-      <ul>
-        <a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a>
-      </ul>
-    </nav>
-  </header>
-
-  <section id="hero" class="d-flex flex-column justify-content-center">
-    <div class="container" data-aos="zoom-in" data-aos-delay="100">
-        <h1>I'm <span class="typed" data-typed-items="Rudra pratap singh, Developer, Freelancer, Photographer"></span></h1>
-        <p>Developer, Freelancer, Photographer</p>
-
-        <div class="social-links"></div>
-          <a href="https://github.com/royalturd"><i class="bx bxl-github"></i></a>
-          <a href="https://twitter.com/Pixelatedjuven?s=09"><i class="bx bxl-twitter"></i></a>
-          <a href="https://www.instagram.com/pixelated_juvenile"><i class="bx bxl-instagram"></i></a>
-          <a href="https://t.me/Royal_Turd"><i class="bx bxl-telegram"></i></a>
-          <a href="https://opensea.io/pixelated_juvenile"><i class="bx bi-currency-dollar"></i></a>
-          <a href="https://royalturd.pythonanywhere.com/"><i class="bx bi-journals"></i></a>
+    <!-- Loading Screen (PixelOS Style) -->
+    <div id="loader" class="loader-overlay">
+        <!-- Brand Logo/Name -->
+        <div class="loader-logo">
+            &lt;royalturd /&gt;
+        </div>
+        
+        <!-- Animated Dots -->
+        <div class="pixel-dots">
+            <div class="pixel-dot"></div>
+            <div class="pixel-dot"></div>
+            <div class="pixel-dot"></div>
+            <div class="pixel-dot"></div>
         </div>
     </div>
-  </div><!-- End Hero -->
-  
-  <!--footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Royalturd</span></strong>. All Rights Reserved
-      </div>
-      </div>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-8">
+        <nav class="max-w-7xl mx-auto bg-m3-surface-container/80 backdrop-blur-xl border border-m3-outline-variant/20 rounded-full h-16 flex items-center justify-between px-6 shadow-lg shadow-black/5 transition-all duration-300">
+            <!-- Logo -->
+            <a href="#" class="font-mono text-xl font-bold tracking-tight text-m3-primary flex items-center gap-2">
+                <span class="material-symbols-rounded text-m3-primary">terminal</span>
+                royalturd
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-2">
+                <a href="#about" class="ripple px-6 py-2 rounded-full text-sm font-medium text-[rgb(var(--text-sub))] hover:bg-m3-on-primary/10 hover:text-m3-primary transition-colors">About</a>
+                <a href="#projects" class="ripple px-6 py-2 rounded-full text-sm font-medium text-[rgb(var(--text-sub))] hover:bg-m3-on-primary/10 hover:text-m3-primary transition-colors">Projects</a>
+                <a href="#skills" class="ripple px-6 py-2 rounded-full text-sm font-medium text-[rgb(var(--text-sub))] hover:bg-m3-on-primary/10 hover:text-m3-primary transition-colors">Stack</a>
+                
+                <div class="w-px h-6 bg-m3-outline-variant/50 mx-2"></div>
+
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-full text-[rgb(var(--text-sub))] hover:bg-m3-on-primary/10 hover:text-m3-primary transition-colors ripple" aria-label="Toggle Dark Mode">
+                    <span class="material-symbols-rounded" id="theme-icon">dark_mode</span>
+                </button>
+                
+                <a href="https://github.com/royalturd" target="_blank" class="ml-2 ripple pl-4 pr-6 py-2 bg-m3-primary text-m3-on-primary rounded-full text-sm font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-m3-primary/20 transition-all">
+                    <span class="material-symbols-rounded text-[20px]">code</span>
+                    GitHub
+                </a>
+            </div>
+
+            <!-- Mobile Controls -->
+            <div class="flex items-center gap-2 md:hidden">
+                 <button id="theme-toggle-mobile" class="p-2 rounded-full text-[rgb(var(--text-sub))] hover:bg-m3-on-primary/10 hover:text-m3-primary transition-colors ripple">
+                    <span class="material-symbols-rounded" id="theme-icon-mobile">dark_mode</span>
+                </button>
+                <button onclick="document.getElementById('mobile-drawer').classList.remove('translate-x-full')" class="text-[rgb(var(--text-sub))] hover:text-m3-primary p-2">
+                    <span class="material-symbols-rounded">menu</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="fixed inset-0 z-[60] transform translate-x-full transition-transform duration-500 ease-emphasized md:hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full')"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-80 bg-m3-surface-container-high rounded-l-[2rem] p-6 shadow-2xl flex flex-col">
+            <div class="flex justify-between items-center mb-10">
+                <span class="font-mono text-xl font-bold text-m3-primary">Navigation</span>
+                <button onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full')" class="p-2 rounded-full hover:bg-m3-surface-container">
+                    <span class="material-symbols-rounded text-[rgb(var(--text-sub))]">close</span>
+                </button>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="#about" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full')" class="flex items-center gap-4 px-4 py-4 rounded-full hover:bg-m3-secondary-container text-[rgb(var(--text-main))] font-medium transition-colors">
+                    <span class="material-symbols-rounded">person</span> About
+                </a>
+                <a href="#projects" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full')" class="flex items-center gap-4 px-4 py-4 rounded-full hover:bg-m3-secondary-container text-[rgb(var(--text-main))] font-medium transition-colors">
+                    <span class="material-symbols-rounded">grid_view</span> Projects
+                </a>
+                <a href="#skills" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full')" class="flex items-center gap-4 px-4 py-4 rounded-full hover:bg-m3-secondary-container text-[rgb(var(--text-main))] font-medium transition-colors">
+                    <span class="material-symbols-rounded">code_blocks</span> Tech Stack
+                </a>
+            </div>
+        </div>
     </div>
-  </footer><!-- End Footer -->
 
-  <div id="preloader"></div>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 md:px-8 pt-32 pb-20 space-y-32">
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        <!-- Hero Section -->
+        <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[80vh]">
+            
+            <!-- Text Content -->
+            <div class="lg:col-span-7 flex flex-col gap-8 order-2 lg:order-1 animate-fade-in-up">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-m3-secondary-container/30 border border-m3-outline-variant/30 w-fit">
+                    <span class="w-2 h-2 rounded-full bg-m3-primary animate-pulse"></span>
+                    <span class="text-sm font-mono text-[rgb(var(--text-sub))]">Available for contributions</span>
+                </div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+                <h1 class="text-6xl md:text-8xl font-medium tracking-tight leading-[1.05] text-[rgb(var(--text-main))]">
+                    Hello, I'm <br>
+                    <span class="text-m3-primary italic font-serif">royalturd</span>
+                </h1>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+                <p class="text-xl md:text-2xl text-[rgb(var(--text-sub))] max-w-2xl font-light">
+                    Computer Science Student & Automation Enthusiast.
+                    <br>
+                    <span class="text-m3-outline opacity-80 mt-2 block text-lg">"A turd who likes to be flushed with ideas :)"</span>
+                </p>
 
+                <div class="flex flex-wrap gap-4 mt-4">
+                    <a href="#projects" class="ripple px-8 py-4 bg-m3-primary text-m3-on-primary rounded-full font-medium text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-m3-primary/30 transition-all">
+                        View Work
+                        <span class="material-symbols-rounded">arrow_downward</span>
+                    </a>
+                    <a href="https://github.com/royalturd" target="_blank" class="ripple px-8 py-4 bg-m3-surface-container-high border border-m3-outline-variant text-m3-primary rounded-full font-medium text-lg flex items-center gap-2 hover:bg-m3-surface-container transition-all">
+                        GitHub
+                        <span class="material-symbols-rounded">open_in_new</span>
+                    </a>
+                     <!-- Instagram Button -->
+                    <a href="https://www.instagram.com/pixelated_juvenile/" target="_blank" class="ripple px-8 py-4 bg-gradient-to-tr from-purple-600 to-pink-500 text-white rounded-full font-medium text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-pink-500/30 transition-all">
+                        Instagram
+                        <span class="material-symbols-rounded">photo_camera</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Visual/Avatar -->
+            <div class="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2 animate-scale-in delay-100">
+                <div class="relative w-72 h-72 md:w-96 md:h-96">
+                    <!-- Abstract shapes behind -->
+                    <div class="absolute inset-0 bg-m3-primary/20 rounded-[3rem] rotate-6 blur-2xl transition-colors duration-500"></div>
+                    <div class="absolute inset-0 bg-m3-tertiary/10 rounded-full -rotate-6 blur-3xl scale-110 transition-colors duration-500"></div>
+                    
+                    <!-- Image container -->
+                    <div class="relative w-full h-full rounded-[3rem] overflow-hidden border border-m3-outline-variant/50 shadow-2xl bg-m3-surface-container transition-colors duration-500">
+                        <!-- Try to fetch Instagram Avatar via unavatar.io, fallback to GitHub -->
+                        <img src="https://unavatar.io/instagram/pixelated_juvenile" 
+                             alt="Profile" 
+                             class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700 ease-emphasized"
+                             onerror="this.src='https://github.com/royalturd.png'">
+                    </div>
+                    
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-6 -right-6 bg-m3-tertiary-container text-white p-6 rounded-[2rem] shadow-xl border border-white/10 flex flex-col items-center animate-bounce duration-[3000ms]">
+                        <span class="text-2xl font-bold">150+</span>
+                        <span class="text-xs opacity-80 uppercase tracking-wider">Stars</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (Expressive Cards) -->
+        <section id="projects" class="space-y-12">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12 border-b border-m3-outline-variant/20 pb-8">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-medium mb-2 text-[rgb(var(--text-main))]">Selected Projects</h2>
+                    <p class="text-[rgb(var(--text-sub))] text-lg">Open source tools and Android development.</p>
+                </div>
+                <a href="https://github.com/royalturd?tab=repositories" target="_blank" class="text-m3-primary font-medium hover:text-m3-on-primary-container flex items-center gap-1 group transition-colors">
+                    View all repositories 
+                    <span class="material-symbols-rounded group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- Bento/Masonry Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Large Featured Card -->
+                <div class="md:col-span-2 bg-m3-surface-container rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group card-hover-effect border border-m3-outline-variant/10 cursor-pointer" onclick="window.open('https://github.com/Python-snippets/Bl.og', '_blank')">
+                    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
+                        <span class="material-symbols-rounded text-[200px] text-[rgb(var(--text-main))]">article</span>
+                    </div>
+                    
+                    <div class="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                            <div class="flex gap-3 mb-6">
+                                <span class="bg-m3-primary-container text-m3-on-primary-container px-4 py-1.5 rounded-full text-sm font-medium">Python</span>
+                                <span class="bg-m3-surface-container-high border border-m3-outline-variant text-[rgb(var(--text-sub))] px-4 py-1.5 rounded-full text-sm">Web App</span>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-4 text-[rgb(var(--text-main))] group-hover:text-m3-primary transition-colors">Bl.og</h3>
+                            <p class="text-[rgb(var(--text-sub))] text-lg leading-relaxed max-w-md">
+                                A clean, minimalistic blogging platform built with Python. Features a streamlined writing experience and efficient content management.
+                            </p>
+                        </div>
+                        <div class="mt-8 flex items-center gap-2 text-m3-primary font-bold tracking-wide uppercase text-sm">
+                            View Source
+                            <span class="material-symbols-rounded text-lg">north_east</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tall Card -->
+                <div class="bg-m3-surface-container-high rounded-[2.5rem] p-8 flex flex-col justify-between group card-hover-effect border border-m3-outline-variant/10 cursor-pointer" onclick="window.open('https://github.com/royalturd/Termux_setup', '_blank')">
+                    <div>
+                        <div class="w-12 h-12 rounded-full bg-m3-tertiary-container flex items-center justify-center mb-6 text-white">
+                            <span class="material-symbols-rounded">terminal</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-[rgb(var(--text-main))]">Termux Setup</h3>
+                        <p class="text-[rgb(var(--text-sub))]">
+                            Bash script for instant Termux environment configuration. Automates package installation and dotfiles.
+                        </p>
+                    </div>
+                    <div class="mt-6">
+                        <span class="text-xs font-mono text-m3-outline">Shell • Automation</span>
+                    </div>
+                </div>
+
+                <!-- Regular Card -->
+                <div class="bg-m3-surface-container rounded-[2.5rem] p-8 group card-hover-effect border border-m3-outline-variant/10 cursor-pointer" onclick="window.open('https://github.com/royalturd/device_xiaomi_laurel_sprout', '_blank')">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 rounded-full bg-[#e8505b]/20 flex items-center justify-center text-[#e8505b]">
+                            <span class="material-symbols-rounded">android</span>
+                        </div>
+                        <span class="text-m3-outline">2020</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-[rgb(var(--text-main))]">Xiaomi Device Tree</h3>
+                    <p class="text-[rgb(var(--text-sub))] mb-4">
+                        Configuration for Xiaomi Mi A3 (laurel_sprout). Essential for building custom Android ROMs and Kernels.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1 bg-m3-surface rounded-full text-[rgb(var(--text-sub))] border border-m3-outline-variant/20">C++</span>
+                        <span class="text-xs px-3 py-1 bg-m3-surface rounded-full text-[rgb(var(--text-sub))] border border-m3-outline-variant/20">Makefile</span>
+                    </div>
+                </div>
+
+                <!-- Regular Card -->
+                <div class="md:col-span-2 lg:col-span-1 bg-m3-surface-container rounded-[2.5rem] p-8 group card-hover-effect border border-m3-outline-variant/10 cursor-pointer" onclick="window.open('https://github.com/royalturd/leech', '_blank')">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="w-12 h-12 rounded-full bg-yellow-400/20 flex items-center justify-center text-yellow-600 dark:text-yellow-400">
+                            <span class="material-symbols-rounded">cloud_download</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-[rgb(var(--text-main))]">Leech Bot</h3>
+                    <p class="text-[rgb(var(--text-sub))] mb-4">
+                        Mirroring bot to download files from torrents/direct links and upload to cloud storage.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1 bg-m3-surface rounded-full text-[rgb(var(--text-sub))] border border-m3-outline-variant/20">Python</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Skills Section (Chips) -->
+        <section id="skills">
+            <div class="bg-m3-surface-container rounded-[3rem] p-8 md:p-16 text-center border border-m3-outline-variant/10 relative overflow-hidden">
+                <!-- Decorative background -->
+                <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                    <div class="absolute top-10 left-10 w-64 h-64 bg-m3-primary rounded-full blur-[80px] opacity-20"></div>
+                    <div class="absolute bottom-10 right-10 w-64 h-64 bg-m3-tertiary rounded-full blur-[80px] opacity-20"></div>
+                </div>
+
+                <div class="relative z-10">
+                    <span class="material-symbols-rounded text-6xl text-[rgb(var(--text-sub))] mb-6">construction</span>
+                    <h2 class="text-3xl md:text-4xl font-medium mb-8 text-[rgb(var(--text-main))]">Technical Arsenal</h2>
+                    
+                    <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto text-[rgb(var(--text-main))]">
+                        <!-- Chips -->
+                        <div class="px-6 py-3 rounded-2xl bg-m3-surface-container-high border border-m3-outline-variant hover:border-m3-primary hover:text-m3-primary transition-colors cursor-default select-none flex items-center gap-2">
+                            <span class="text-xl">🐍</span> Python
+                        </div>
+                        <div class="px-6 py-3 rounded-2xl bg-m3-surface-container-high border border-m3-outline-variant hover:border-m3-primary hover:text-m3-primary transition-colors cursor-default select-none flex items-center gap-2">
+                            <span class="text-xl">🐚</span> Bash / Shell
+                        </div>
+                        <div class="px-6 py-3 rounded-2xl bg-m3-surface-container-high border border-m3-outline-variant hover:border-m3-primary hover:text-m3-primary transition-colors cursor-default select-none flex items-center gap-2">
+                            <span class="text-xl">#️⃣</span> C#
+                        </div>
+                        <div class="px-6 py-3 rounded-2xl bg-m3-surface-container-high border border-m3-outline-variant hover:border-m3-primary hover:text-m3-primary transition-colors cursor-default select-none flex items-center gap-2">
+                            <span class="text-xl">🤖</span> Android Dev
+                        </div>
+                        <div class="px-6 py-3 rounded-2xl bg-m3-surface-container-high border border-m3-outline-variant hover:border-m3-primary hover:text-m3-primary transition-colors cursor-default select-none flex items-center gap-2">
+                            <span class="text-xl">🐧</span> Linux
+                        </div>
+                        <div class="px-6 py-3 rounded-2xl bg-m3-surface-container-high border border-m3-outline-variant hover:border-m3-primary hover:text-m3-primary transition-colors cursor-default select-none flex items-center gap-2">
+                            <span class="material-symbols-rounded text-lg">git</span> Git
+                        </div>
+                        <div class="px-6 py-3 rounded-2xl bg-m3-surface-container-high border border-m3-outline-variant hover:border-m3-primary hover:text-m3-primary transition-colors cursor-default select-none flex items-center gap-2">
+                            <span class="text-xl">🐳</span> Docker
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-m3-surface-container mt-auto py-12 px-4 border-t border-m3-outline-variant/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="font-mono text-xl font-bold text-m3-primary mb-1">&lt;royalturd /&gt;</p>
+                <p class="text-[rgb(var(--text-sub))] text-sm">Crafted with Material 3 & Tailwind.</p>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="https://github.com/royalturd" target="_blank" class="w-12 h-12 rounded-full bg-m3-surface-container-high flex items-center justify-center text-[rgb(var(--text-sub))] hover:bg-m3-primary hover:text-m3-on-primary transition-colors">
+                    <span class="material-symbols-rounded">code</span>
+                </a>
+                 <a href="https://www.instagram.com/pixelated_juvenile/" target="_blank" class="w-12 h-12 rounded-full bg-m3-surface-container-high flex items-center justify-center text-[rgb(var(--text-sub))] hover:bg-gradient-to-tr hover:from-purple-600 hover:to-pink-500 hover:text-white transition-colors">
+                    <span class="material-symbols-rounded">photo_camera</span>
+                </a>
+                <a href="mailto:contact@royalturd.me" class="w-12 h-12 rounded-full bg-m3-surface-container-high flex items-center justify-center text-[rgb(var(--text-sub))] hover:bg-m3-primary hover:text-m3-on-primary transition-colors">
+                    <span class="material-symbols-rounded">mail</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // 1. Loading Animation Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            // Small delay to ensure the smooth animation is seen
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 1000); // 1s wait to admire the animation
+        });
+
+        // 2. Ripple Effect
+        document.querySelectorAll('.ripple').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+                
+                let ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                this.appendChild(ripples);
+
+                setTimeout(() => {
+                    ripples.remove()
+                }, 1000);
+            })
+        });
+
+        // 3. Theme Toggle Logic
+        const themeToggles = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
+        const themeIcons = [document.getElementById('theme-icon'), document.getElementById('theme-icon-mobile')];
+        const htmlElement = document.documentElement;
+
+        // Check local storage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'light') {
+            setTheme('light');
+        } else {
+            setTheme('dark'); // Default to dark as per original design
+        }
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.setAttribute('data-theme', 'dark');
+                themeIcons.forEach(icon => icon.textContent = 'light_mode'); // Show sun icon when in dark mode
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.removeAttribute('data-theme'); // Removing data-theme triggers :root variables (Light)
+                themeIcons.forEach(icon => icon.textContent = 'dark_mode'); // Show moon icon when in light mode
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        themeToggles.forEach(toggle => {
+            if(toggle) {
+                toggle.addEventListener('click', () => {
+                    const currentTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                    setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+                });
+            }
+        });
+    </script>
 </body>
-
 </html>
