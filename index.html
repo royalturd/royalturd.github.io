@@ -438,10 +438,11 @@
                     <!-- Image container -->
                     <div
                         class="relative w-full h-full rounded-[3rem] overflow-hidden border border-m3-outline-variant/50 shadow-2xl bg-m3-surface-container transition-colors duration-500">
-                        <!-- Try to fetch Instagram Avatar via unavatar.io, fallback to GitHub -->
-                        <img src="https://unavatar.io/instagram/pixelated_juvenile" alt="Profile"
+                        <!-- Using GitHub as primary if Instagram fetch via unavatar fails, added onerror loop prevention -->
+                        <img src="https://unavatar.io/instagram/pixelated_juvenile?fallback=https://github.com/royalturd.png" 
+                            alt="Profile"
                             class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700 ease-emphasized"
-                            onerror="this.src='https://github.com/royalturd.png'">
+                            onerror="this.onerror=null;this.src='https://github.com/royalturd.png';">
                     </div>
 
                     <!-- Floating badge -->
